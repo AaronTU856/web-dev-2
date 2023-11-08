@@ -1,0 +1,22 @@
+
+/* CSS for vertical alignment and style box */
+.form-container {
+    background-color: #ffffff;
+    border: 2px solid #413e3e;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+    display: block; /* Display each form field as a block element */
+}
+
+input {
+    width: 40%;
+    padding: 15px;
+    border: 5px solid #a29f9f;
+    border-radius: 10px;
+    font-size: 14px;
+    display: block; /* Display each input as a block element */
+}
