@@ -2,7 +2,7 @@
     <option value="">Select Category</option>
     <?php
     // Retrieve categories from the database
-    $categoryQuery = "SELECT category FROM categories";
+    $categoryQuery = "SELECT category FROM category";
     $categoryResult = $conn->query($categoryQuery);
 
     while ($categoryRow = $categoryResult->fetch_assoc()) {
