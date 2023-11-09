@@ -7,7 +7,7 @@
 <body>
     <div class="form-container">
         <p>Register a New User</p>
-        <form method="post" action="register.php"> <!-- Point to register.php script -->
+        <form method="post" action="Users.php"> <!-- Point to Users.php script -->
             <!-- Add form fields  -->
             <div class="form-field">
                 <input type="text" name="username" placeholder="User Name">
