@@ -23,7 +23,7 @@ die("Connection failed: " . $conn->connect_error);
 
 
 if ( isset($_POST['Username']) 
-    && isset($_POST['FirstName']) && isset($_POST['LastName']) && isset($_POST['Password']) && isset($_POST['AddressLine']) && isset($_POST['AddressLine2'])&& isset($_POST['City']) && isset($_POST['Email'])) {
+    && isset($_POST['FirstName']) && isset($_POST['LastName']) && isset($_POST['Password']) && isset($_POST['AddressLine']) && isset($_POST['AddressLine2'])&& isset($_POST['City']) && isset($_POST['Email']) && isset($_POST['Telephone'])) {
     $n = $_POST['Username'];
     $f = $_POST['FirstName'];
     $r = $_POST['LastName'];
@@ -32,9 +32,10 @@ if ( isset($_POST['Username'])
     $d = $_POST['AddressLine2'];
     $c = $_POST['City'];
     $e = $_POST['Email'];
+    $t = $_POST['Telephone'];
 
-    $sql = "INSERT INTO Users (Username, FirstName, LastName, Password, AddressLine, AddressLine2, City, Email)
-    VALUES ('$n', '$f', '$r', '$p','$a','$d','$c','$e')";
+    $sql = "INSERT INTO Users (Username, FirstName, LastName, Password, AddressLine, AddressLine2, City, Email, Telephone)
+    VALUES ('$n', '$f', '$r', '$p','$a','$d','$c','$e','$t')";
     if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
     } else {
@@ -71,6 +72,9 @@ if ( isset($_POST['Username'])
             <input type="email" name="Email" placeholder="Email">
         </div>
         <div class="form-field">
+            <input type="phone" name="Telephone" placeholder="Telephone">
+        </div>
+        <div class="form-field">
             <input type="submit" value="Add New">
         </div>
     </form>
@@ -91,6 +95,7 @@ if ($result->num_rows > 0) {
             <th>Address Line2</th>
             <th>City</th>
             <th>Email</th>
+            <th>Telephone</th>
     
          </tr>";
 
@@ -104,6 +109,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row['Address Line2'] . "</td>";
         echo "<td>" . $row['City'] . "</td>";
         echo "<td>" . $row['Email'] . "</td>";
+        echo "<td>" . $row['Telephone'] . "</td>";
         echo "</tr>";
     }
 

@@ -1,3 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <p>Register a New User</p>
+        <form method="post" action="register.php"> <!-- Point to register.php script -->
+            <!-- Add form fields  -->
+            <div class="form-field">
+                <input type="text" name="username" placeholder="User Name">
+            </div>
+            <div class="form-field">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-field">
+                <input type="password" name="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <div class="form-field">
+                <input type="text" name="firstname" placeholder="First Name">
+            </div>
+            <div class="form-field">
+                <input type="text" name="lastname" placeholder="Last Name">
+            </div>
+            <div class="form-field">
+                <input type="text" name="phoneNumber" placeholder="Phone Number">
+            </div>
+            <div class="form-field">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
 <?php
 // Database connection code or configuration file if needed
 
@@ -8,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmPassword = $_POST["confirmPassword"];
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
-    $mobile = $_POST["mobile"];
+    $mobile = $_POST["phoneNumber"];
 
     // Create a connection to the database
     $servername = "localhost";
