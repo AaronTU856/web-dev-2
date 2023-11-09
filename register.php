@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validation and security measures here to prevent SQL injection
 
+    
+
     // Check for password length and match
     if (strlen($password) < 6) {
         echo "Password should be at least six characters long.";
