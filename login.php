@@ -13,7 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db_password = ""; // Corrected variable name
     $db_name = "BookReservationDB"; // Corrected variable name
 
-    $conn = new mysqli($servername, $db_username, $db_password, $db_name);
+    // $conn = new mysqli($servername, $db_username, $db_password, $db_name);
+    $conn = mysqli_connect($servername, $db_username, $db_password, $db_name);
 
     // Check the database connection
     if ($conn->connect_error) {
@@ -27,15 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Query to check if the username exists and authenticate the user
     $checkUserQuery = "SELECT * FROM Users WHERE username = '$username' and password = '$password' ";
-    $result = $conn->query($checkUserQuery);
+    $result = mysqli_query($conn, $checkUserQuery);
+
+    echo $result;
 
     if ($result->num_rows == 1) {
         // Username exists, fetch the user's data
         $user = $result->fetch_assoc();
         $hashedPassword = $user["password"];
 
+        echo 'user:' . $user;
+        // echo 'password:' . $password;
+
         // Verify the password using password_verify function
-        if (password_verify($password, $hashedPassword)) {
+        if ($password == $hashedPassword) {
             // Password is correct, user is authenticated
 
             // Set user information in the session for future use
