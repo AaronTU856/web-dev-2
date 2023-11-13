@@ -1,15 +1,3 @@
-<select name="category">
-    <option value="">Select Category</option>
-    <?php
-    // Retrieve categories from the database
-    $categoryQuery = "SELECT category FROM category";
-    $categoryResult = $conn->query($categoryQuery);
-
-    while ($categoryRow = $categoryResult->fetch_assoc()) {
-        echo '<option value="' . $categoryRow["category"] . '">' . $categoryRow["category"] . '</option>';
-    }
-    ?>
-</select>
 
 <?php
 session_start();
@@ -32,7 +20,7 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
 
 <body>
   <?php
-  include $root . '/include/header.php';
+  include $root . '/Assignment/CSS/include/header.css';
   ?>
 
   <main>
@@ -46,14 +34,17 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
         }
         echo '<input type="text" id="search-term" name="search-term" ' . $value . ' required>'
         ?>
+
+
         <button>Search</button>
       </form>
       <form method="post" class="category-form">
         <select id="category-id" name="category-id" placeholder="Category" required>
           <option value="" disabled selected hidden>Select a Category</option>
+
           <?php
-          require_once $root . '/model/database_connect.php';
-          $categorySelectQuery = 'SELECT id, title FROM categories';
+          require_once $root . '/sql/database_connect.php';
+          $categorySelectQuery = 'SELECT category_ID, title FROM Category';
           $result = $conn->query($categorySelectQuery);
           while ($row = $result->fetch_assoc()) {
             echo '<option value="' . $row['id'] . '">' . $row['title'] . '</option>';
@@ -70,7 +61,7 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
     if (isset($_POST['reserve'])) {
       $isbn = $_POST['reserve'];
       $username = $_SESSION['username'];
-      $insertReservationQuery = "INSERT INTO reservations VALUES ('$isbn', '$username', CURRENT_DATE())";
+      $insertReservationQuery = "INSERT INTO Reservations VALUES ('$isbn', '$username', CURRENT_DATE())";
       $conn->query($insertReservationQuery);
       $updateBookQuery = "UPDATE books SET reserved = true WHERE isbn = '$isbn'";
       $conn->query($updateBookQuery);
