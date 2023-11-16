@@ -4,7 +4,6 @@ session_start();
 $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 

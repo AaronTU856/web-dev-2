@@ -1,6 +1,26 @@
 <?php
-$root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
+#$root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
 ?>
+
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "BookReservationDB";
+
+// Create connection
+$conn = new mysqli($servername,
+$username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,6 +82,7 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
         <button class="submit">Submit</button>
       </form>
       <?php
+
       if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['firstName'])) {
         require_once $root . 'Assignment/CSS/sql/database_connect.php';
 
@@ -73,13 +94,13 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
         if (isset($_POST['surname'])) {
           $surname = htmlentities($_POST['surname']);
         }
-        $addressLineOne = '';
-        if (isset($_POST['addressLineOne'])) {
-          $addressLineOne = htmlentities($_POST['addressLineOne']);
+        $addressLine = '';
+        if (isset($_POST['addressLine'])) {
+          $addressLine = htmlentities($_POST['addressLineOne']);
         }
-        $addressLineTwo = '';
+        $addressLine2 = '';
         if (isset($_POST['addressLineTwo'])) {
-          $addressLineTwo = htmlentities($_POST['addressLineTwo']);
+          $addressLine2 = htmlentities($_POST['addressLineTwo']);
         }
         $city = '';
         if (isset($_POST['city'])) {
@@ -116,7 +137,7 @@ $root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
           }
         }
         // Success path
-        $newUserInsert = "INSERT INTO users VALUES ('$username', '$password', '$firstName', '$surname', '$addressLineOne', '$addressLineTwo', '$city', '$telephone', '$mobile')";
+        $newUserInsert = "INSERT INTO users VALUES ('$username', '$firstName', '$surname', '$password', '$addressLine', '$addressLine2', '$city', '$email', '$telephone')";
         $result = $conn->query($newUserInsert);
         if ($result === true) {
           echo '<p class="success">Success! New Account Created!</p>';
