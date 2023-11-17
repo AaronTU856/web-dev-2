@@ -67,7 +67,7 @@ $conn->close();
         <input type="text" name="surname" required>
 
         <label for="password">Password:</label>
-        <input type="text" name="password" required>
+        <input type="password" name="password" required>
 
         <label for="addressLine">Address Line:</label>
         <input type="text" name="addressLine" required>
