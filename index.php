@@ -1,49 +1,45 @@
 <?php
-session_start();
+   // Create a connection to the database
+   $servername = "localhost";
+   $db_username = "root"; // Corrected variable name
+   $db_password = ""; // Corrected variable name
+   $db_name = "BookReservationDB"; // Corrected variable name
 
-$root = $_SERVER['DOCUMENT_ROOT'] . '/Assignment';
+   $conn = new mysqli($servername, $db_username, $db_password, $db_name);
+
+   // Check the database connection
+   if ($conn->connect_error) {
+       die("Connection failed: " . $conn->connect_error);
+   }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/Assignment/css/index.css">
-  <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../project/css/style.css">
+    <title>User CRUD</title>
 </head>
-
 <body>
-  <?php
-  include $root . '/Assignment/CSS/include/header.css';
-  ?>
+    <h2>Add User CRUD Operations</h2>
 
-<main>
-    <h2>Home</h2>
-    <?php require_once $root . '/Assignment/CSS/sql/database_connect.php';
-    if (isset($_SESSION['username'])) {
-      echo '<h3 class="welcome">Welcome, <strong>' . $_SESSION["username"] . '</strong>.</h3>';
-    }
-    ?>
-    <nav class="main-menu">
-      <ul>
-        <?php if (isset($_SESSION['username'])) {
-          echo '<li><a href="/Assignment/search.php">Book Search</a></li>';
-        } ?>
-        <?php if (isset($_SESSION['username'])) {
-          echo '<li><a href="/Assignment/reservations.php">My Reservations</a></li>';
-        } ?>
-        <?php if (!isset($_SESSION['username'])) {
-          echo '<li><a href="/Assignment/register.php">Register an Account</a></li>';
-        } ?>
-      </ul>
-    </nav>
-  </main>
+    <form action="register.php" method="post">
+        <label for="username">Username:</label> 
+        <input id="username" name="username" required="" type="text" />
+        <label for="password">Password:</label>
+        <input id="password" name="password" required="" type="password" />
+        <button type="submit">Login</Button>
+        <button onclick="location.href='./register.php'">Register</button>
+</form>
 
-  <?php
-  include $root . '/view/include/footer.php';
-  ?>
+
+    <ul>
+        <li><a href="register.php">Add Users</a></li>
+        
+    </ul>
 </body>
-
 </html>
+
+

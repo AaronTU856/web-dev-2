@@ -1,22 +1,72 @@
-
-/* CSS for vertical alignment and style box */
-.form-container {
-    background-color: #ffffff;
-    border: 2px solid #413e3e;
-    padding: 50px;
-    border-radius: 10px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-.form-field {
-    margin-bottom: 20px;
-    display: block; /* Display each form field as a block element */
+.form-container {
+    max-width: 180px;
+    margin: 20px auto;
+    background-color: #de9e80;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form .user-form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
 }
 
 input {
-    width: 40%;
-    padding: 15px;
-    border: 5px solid #a29f9f;
-    border-radius: 10px;
-    font-size: 14px;
-    display: block; /* Display each input as a block element */
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #151212;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.table-container {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th, td {
+    padding: 8px;
+}
+
+th {
+    background-color: #4caf50;
+    color: #fff;
 }
