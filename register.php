@@ -25,6 +25,7 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
+//require_once "connection.php";
    
 
 if ( isset($_POST['username']) && isset($_POST['firstname'])
@@ -56,7 +57,7 @@ $conn->close();
 <div class="form-container">
     <h2>Add User</h2>
     <form method="post" class="user-form">
-        <form method="post">
+    
         <label for="username">Username:</label>
         <input type="text" name="username" required>
 

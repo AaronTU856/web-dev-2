@@ -9,19 +9,24 @@
 
     // Start of Pt. 2
    // Create a connection to the database
-   $servername = "localhost";
-   $db_username = "root"; // Corrected variable name
-   $db_password = ""; // Corrected variable name
-   $db_name = "BookReservationDB"; // Corrected variable name
+  //  
+  
+  //require_once "connection.php";
 
-   $conn = new mysqli($servername, $db_username, $db_password, $db_name);
+  $servername = "localhost";
+  $db_username = "root"; // Corrected variable name
+  $db_password = ""; // Corrected variable name
+  $db_name = "BookReservationDB"; // Corrected variable name
+
+  $conn = new mysqli($servername, $db_username, $db_password, $db_name);
 
    // Check the database connection
    if ($conn->connect_error) {
        die("Connection failed: " . $conn->connect_error);
    }
 
-   if (isset($_POST['username']) && isset($_POST['password'])) {
+
+  if (isset($_POST['username']) && isset($_POST['password'])) {
     
     $username = $_POST['username'];
     $password = $_POST['password'];

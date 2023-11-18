@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    //session_start();
    // Create a connection to the database
    $servername = "localhost";
    $db_username = "root"; // Corrected variable name
@@ -13,26 +13,29 @@
        die("Connection failed: " . $conn->connect_error);
    }
 
-   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    //require_once "connection.php";
 
-    $usernameQuery = "SELECT password FROM Users where username='$username'";
-    $result = $conn->query($usernameQuery);
-    $data = $result->fetch_assoc();
 
-    if(/*Check if the user even exists*/){
-        if($data['password'] == $password){
-            echo "Correct Password!";
-            // redirect to library
-            // Other shit here :)
-        }
-        else{
-            echo "Incorrect Password!";
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $usernameQuery = "SELECT password FROM Users where username='$username'";
+        $result = $conn->query($usernameQuery);
+        $data = $result->fetch_assoc();
+
+        if(/*Check if the user even exists*/){
+            if($data['password'] == $password){
+                echo "Correct Password!";
+                // redirect to library
+                // Other shit here :)
+            }
+            else{
+                echo "Incorrect Password!";
+            }
         }
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +53,7 @@
         <input id="username" name="username" required type="text" />
         <label for="password">Password:</label>
         <input id="password" name="password" required type="password" />
-        <button type="submit">Login</Button>
+        <button type="submit">Login</button>
         <button onclick="location.href='./register.php'">Register</button>
     </form>
 
