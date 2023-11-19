@@ -62,7 +62,7 @@ $conn->close();
     <title>User CRUD</title>
 </head>
 <body>
-    <h2>Add User CRUD Operations</h2>
+    <h2>Welcome to the Library Website</h2>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <label for="Username">Username:</label>
