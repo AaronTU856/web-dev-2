@@ -1,18 +1,8 @@
 <?php
 session_start();
 
-// Database connection
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "BookReservationDB";
+require_once "connection.php";
 
-$conn = new mysqli($servername, $db_username, $db_password, $db_name);
-
-// Check the database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Check if the user is not logged in, redirect them to the login page
 if (!isset($_SESSION['Username'])) {

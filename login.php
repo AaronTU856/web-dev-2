@@ -3,6 +3,8 @@
 // Start a session
 session_start()
 
+require_once "connection.php";
+
 // 1. Get the form data
 // 2. Query the DB to make sure the
 //  2a. Account exists,
@@ -12,23 +14,7 @@ session_start()
 // 5. Create session
 
     // Start of Pt. 2
-   // Create a connection to the database
-  //  
-  
-  //require_once "connection.php";
-
-// Create a connection to the database
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "BookReservationDB";
-
-$conn = new mysqli($servername, $db_username, $db_password, $db_name);
-
-// Check the database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+   
 
 if (isset($_POST['Username']) && isset($_POST['Password'])) {
     $Username = $_POST['Username'];

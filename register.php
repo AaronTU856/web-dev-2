@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User Form</title>
-    <link rel="stylesheet" href="css/style.css">
 
-    <!-- Other head elements and styles go here -->
-</head>
-<body>
 
 <?php
 // start a session
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "BookReservationDB";
+require_once "connection.php";
 
-// Create connection
-$conn = new mysqli($servername,
-$username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-die("Connection failed: " . $conn->connect_error);
-}
-
-//require_once "connection.php";
+// Include the header
+//include('header.php');
    
 // Check if the form has been submitted and record added successfully
 if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Surname']) && isset($_POST['Password']) && isset($_POST['AddressLine']) && isset($_POST['AddressLine2']) && isset($_POST['City']) && isset($_POST['Email']) && isset($_POST['Telephone'])) {
@@ -48,7 +27,7 @@ if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Sur
     if ($stmt->execute()) {
         // Display a button to go to the login page
         echo '<div class="form-container">';
-        echo '<p>Record added successfully. <a href="login.php">Go to login page</a></p>';
+        echo '<p>Record added successfully. <a href="index.php">Go to login page</a></p>';
         echo '</div>';
     } else {
         echo "Error: " . $stmt->error;
@@ -60,10 +39,24 @@ if (isset($_POST['Username']) && isset($_POST['Firstname']) && isset($_POST['Sur
 // Your remaining HTML content and PHP code
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h1>Welcome to the Library</h1>
+    <a href="index.php">Login</a>
+</div>
 
 
 <div class="form-container">
-    <h2>Add User</h2>
+    <h2>Registration</h2>
     <form method="post" class="user-form">
     
         <label for="Username">Username:</label>
@@ -148,3 +141,8 @@ $conn->close();
 
 </body>
 </html>
+
+<?php
+    // Include the footer
+    include('footer.php');
+?>

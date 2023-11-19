@@ -3,18 +3,8 @@
 <?php
 session_start();
 
-// Create a connection to the database
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "BookReservationDB";
+require_once "connection.php";
 
-$conn = new mysqli($servername, $db_username, $db_password, $db_name);
-
-// Check the database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['Username'];
@@ -45,24 +35,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "User not found.";
     }
 
+    
+
     $stmt->close();
 }
 
 $conn->close();
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../project/css/style.css">
-    <title>User CRUD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Library</title>
+    <div class="header">
+    <h1>Welcome to the Library Website <?php echo $_SESSION['Username']; ?>!</h1>
+    <a href="register.php">Register</a>
+</div>
+
 </head>
 <body>
-    <h2>Welcome to the Library Website</h2>
+    <h2>Please Login to your Library Account</h2>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <label for="Username">Username:</label>
@@ -73,11 +68,13 @@ $conn->close();
         <button onclick="location.href='register.php'">Register</button>
     </form>
 
-    <ul>
-        <li><a href="register.php">Add Users</a></li>
-    </ul>
 </body>
 </html>
+
+<?php
+    // Include the footer
+    include('footer.php');
+?>
 
 
 

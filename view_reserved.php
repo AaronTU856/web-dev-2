@@ -1,24 +1,36 @@
+
 <?php
 session_start();
 
-// Database connection
-$servername = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "BookReservationDB";
+require_once "connection.php";
 
-$conn = new mysqli($servername, $db_username, $db_password, $db_name);
-
-// Check the database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Check if the user is not logged in, redirect them to the login page
 if (!isset($_SESSION['Username'])) {
     header("Location: login.php");
     exit();
 }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - Search Results</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h1>Welcome to the Library Website, <?php echo $_SESSION['Username']; ?>!</h1>
+    <a href="logout.php">Logout</a>
+    <a href='search.php' class='back-to-search-btn'>Search</a>
+</div>
+
+
+<?php
+
 
 // Get reserved books for the current user
 $username = $_SESSION['Username'];
@@ -45,5 +57,15 @@ if ($stmt) {
     echo "Error in query preparation: " . $conn->error;
 }
 
+
 $conn->close();
 ?>
+
+</body>
+</html>
+
+<?php
+    // Include the footer
+    include('footer.php');
+?>
+
