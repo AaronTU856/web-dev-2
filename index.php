@@ -24,7 +24,9 @@
         $result = $conn->query($usernameQuery);
         $data = $result->fetch_assoc();
 
-        if(/*Check if the user even exists*/){
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
+            
             if($data['password'] == $password){
                 echo "Correct Password!";
                 // redirect to library
