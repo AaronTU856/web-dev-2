@@ -1,4 +1,8 @@
 <?php
+
+// Start a session
+session_start()
+
 // 1. Get the form data
 // 2. Query the DB to make sure the
 //  2a. Account exists,
@@ -13,45 +17,64 @@
   
   //require_once "connection.php";
 
-  $servername = "localhost";
-  $db_username = "root"; // Corrected variable name
-  $db_password = ""; // Corrected variable name
-  $db_name = "BookReservationDB"; // Corrected variable name
+// Create a connection to the database
+$servername = "localhost";
+$db_username = "root";
+$db_password = "";
+$db_name = "BookReservationDB";
 
-  $conn = new mysqli($servername, $db_username, $db_password, $db_name);
+$conn = new mysqli($servername, $db_username, $db_password, $db_name);
 
-   // Check the database connection
-   if ($conn->connect_error) {
-       die("Connection failed: " . $conn->connect_error);
-   }
+// Check the database connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+if (isset($_POST['Username']) && isset($_POST['Password'])) {
+    $Username = $_POST['Username'];
+    $Password = $_POST['Password'];
 
-  if (isset($_POST['username']) && isset($_POST['password'])) {
-    
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-  
-    $logInQuery = "SELECT username, password FROM users WHERE username = '$username'";
-    $result = $conn->query($logInQuery);
-    if (!$result) {
-      echo '<p class="error">Error connecting to database' . $conn->error . '.</p>';
-    } elseif ($result->num_rows === 0) {
-      echo '<p class="error">Incorrect username or password.</p>';
-      return;
+    $logInQuery = $conn->prepare("SELECT * FROM Users WHERE Username = ?");
+    $logInQuery->bind_param("s", $Username);
+    $logInQuery->execute();
+    $result = $logInQuery->get_result();
+
+    if ($result->num_rows > 0) {
+        // Fetch the associative array
+        $row = $result->fetch_assoc();
+
+        // Access the password using the associative key
+        $truePasswordHash = $row['Password'];
+
+        if (password_verify($Password, $truePasswordHash)) {
+            // Start the session and set the 'username' session variable
+            $_SESSION["Username"] = $Username;
+            echo '<p class="success">Logged in successfully!</p>';
+            
+            // Redirect to search page
+            header("Location: search.php");
+            exit(); // Make sure to exit after the header to prevent further execution
+        } else {
+            echo '<p class="error">Incorrect Username or Password.</p>';
+        }
     } else {
-      $truePassword = mysqli_fetch_array($result)[1];
-      if ($password !== $truePassword) {
-        echo '<p class="error">Incorrect username or password.</p>';
-        return;
-      } else {
-        $_SESSION["username"] = $username;
-        echo '<p class="success">Logged in successfully!</p>';
-        echo '<p class="main-menu-link">Click <a href="/Assignment/index.php">here</a> to go to the main menu</p>';
-      }
+        // User is not registered, display an error and direct them to the register page
+        echo '<p class="error">User not found. Click <a href="register.php">here</a> to register.</p>';
     }
-  }
 
+    // Close the prepared statement
+    $logInQuery->close();
+}
+
+// Close the database connection
+$conn->close();
 ?>
+
+
+
+
+
+
 
 
 
